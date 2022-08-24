@@ -9,7 +9,7 @@ x = activar 1 paso
 
 int dir = 7 ; 
 int stp = 8 ;
-char letra;
+String letra;
 
 void setup() {
   //comunicacion serial bluetooth
@@ -22,26 +22,38 @@ void setup() {
 }
 
 void loop() {
-  
-if (Serial.available())
-  //guarda datos
-  letra = Serial.read();
-  
+
+  while(Serial.available()){
+    //guarda datos
+  letra = char(Serial.read());
+  Serial.println(letra);
+
   
   //direccion
-  if(letra == "r")
-    digitalWrite(dir, HIGH);
-    delayMicroseconds(20);
+  if(letra == "r"){
+        digitalWrite(dir, HIGH);
+        delayMicroseconds(20);
+  }
+
     
-  if(letra == "d")
-    digitalWrite(dir, LOW);
-    delayMicroseconds(20);
+  if(letra == "d"){
+        digitalWrite(dir, LOW);
+        delayMicroseconds(20);
+  }
+
 
   //paso
-  if(letra == "x")
-    digitalWrite(stp, HIGH);
-    delayMicroseconds(3000);
-    digitalWrite(stp, LOW);
+  if(letra == "x"){
+      for(int i=0 ; i<100 ; i++){
+        digitalWrite(stp, HIGH);
+        delayMicroseconds(3000);
+        digitalWrite(stp, LOW);
+  }
+  }
+
+
+  
+}
 
   
 }
